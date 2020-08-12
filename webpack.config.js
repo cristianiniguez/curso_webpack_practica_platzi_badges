@@ -5,14 +5,12 @@ const webpack = require('webpack')
 
 module.exports = {
     entry: {
-        home: path.resolve(__dirname, 'src/js/index.js'),
-        contacto: path.resolve(__dirname, 'src/js/contacto.js')
+        app: path.resolve(__dirname, 'src/index.js'),
     },
-    mode: 'production',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js',
-        publicPath: 'dist/',
+        publicPath: 'http://localhost:3001/',
         chunkFilename: 'js/[id].[chunkhash].js'
     },
     module: {
@@ -28,13 +26,7 @@ module.exports = {
                     {
                         loader: MiniCSSExtractPlugin.loader,
                     },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
-                    'postcss-loader'
+                    'css-loader'
                 ]
             },
             {
@@ -42,39 +34,9 @@ module.exports = {
                 use: {
                     loader: 'url-loader',
                     options: {
-                        limit: 90000,
+                        limit: 1000,
                     }
                 },
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    {
-                        loader: MiniCSSExtractPlugin.loader,
-                    },
-                    'css-loader',
-                    'less-loader'
-                ]
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: MiniCSSExtractPlugin.loader,
-                    },
-                    'css-loader',
-                    'sass-loader'
-                ]
-            },
-            {
-                test: /\.styl$/,
-                use: [
-                    {
-                        loader: MiniCSSExtractPlugin.loader,
-                    },
-                    'css-loader',
-                    'stylus-loader'
-                ]
             },
         ]
     },
@@ -83,10 +45,8 @@ module.exports = {
             filename: 'css/[name].css',
             chunkFilename: 'css/[id].css'
         }),
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            title: 'webpack-dev-server',
-            template: path.resolve(__dirname, 'index.html')
+            template: path.resolve(__dirname, 'public/index.html')
         }),
         new webpack.DllReferencePlugin({
             manifest: require('./modules-manifest.json')
