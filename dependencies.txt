@@ -5,3 +5,13 @@ webpack webpack-cli webpack-dev-server css-loader style-loader file-loader babel
 @babel/plugin-proposal-class-properties
 
 html–webpack-plugin
+
+
+mini-css-extract-plugin url-loader
+
+
+optimize-css-assets-webpack-plugin
+
+terser-webpack-plugin
+clean-webpack-plugin
+add-asset-html-webpack-plugin
